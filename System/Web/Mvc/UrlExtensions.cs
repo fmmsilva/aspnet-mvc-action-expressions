@@ -24,12 +24,20 @@ namespace System.Web.Mvc
             ParameterInfo[] parameters = method.GetParameters();
 
             Dictionary<string, object> dict = new Dictionary<string, object>();
-            foreach (ConstantExpression argument in body.Arguments)
+            foreach (Expression arg in body.Arguments)
             {
-                int i = body.Arguments.IndexOf(argument);
-                string key = parameters[i].Name;
-                object value = argument.Value;               
-                dict.Add(key, value);
+                if (arg is ConstantExpression)
+                {
+                    ConstantExpression argument = arg as ConstantExpression;
+                    int i = body.Arguments.IndexOf(argument);
+                    string key = parameters[i].Name;
+                    object value = argument.Value;
+                    dict.Add(key, value);
+                }
+                else
+                {
+                    //TODO
+                }
             }
 
             RouteValueDictionary routeDict = null;
