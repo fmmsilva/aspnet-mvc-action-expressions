@@ -16,4 +16,4 @@ public class HomeController : Controller {
 
 }
 
-@(Url.Action<HomeController>(c=>c.Index(1))) becomes /Home/Index/1
+@(Url.Action&lt;HomeController&gt;(c=>c.Index(1))) becomes /Home/Index/1
